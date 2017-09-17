@@ -30,7 +30,6 @@ var vocab = [
 		'netus', 'fames', 'quisque', 'euismod', 'curabitur', 'lectus',
 		'elementum', 'tempor', 'risus', 'cras'
 ];
-var text = '';
 var btn = document.querySelector('.create');
 var msg = document.querySelector('.output');
 
@@ -38,6 +37,7 @@ var msg = document.querySelector('.output');
 
 
 btn.addEventListener('click', function () {
+    var text = '';
     var amountWords = Number(document.querySelector('#amount').value);
     for (var i = 0; i <= amountWords; i++) {
         text += vocab[Math.floor(Math.random() * vocab.length)] + ' ';
