@@ -60,19 +60,8 @@ btn.addEventListener('click', function () {
         if (text.slice(-1) === '.') {
             text = text.slice(0, -2) + text.slice(-1) + ' ';
         }
-        
-  
-        
 
         msg.textContent += text;
     }
-
-
-
-
-
-
-
-
 
 })
