@@ -32,14 +32,14 @@ var vocab = [
 ];
 var btn = document.querySelector('.create');
 var msg = document.querySelector('.output');
+/* Clear output on every new button click */
+
+var output = 'Elit Eleifend nec quam, aliquam vitae Interdum id curabitur fermentum. Nec ornare Nibh porttitor dolor Rhoncus fusce aptent enim aliquam justo nibh lorem semper sapien Morbi porta nisi sociosqu semper sed nisl ultrices facilisis nostra nostra pellentesque Dictumst, sollicitudin a iaculis nostra Id consequat Pharetra ullamcorper. Suscipit gravida facilisis. Class Sociosqu hendrerit, etiam In aenean Aliquet Consectetur ut libero neque Conubia etiam Id Scelerisque Suspendisse. Urna proin lectus Cras pharetra sit enim dictum dictum aenean porta curabitur etiam feugiat imperdiet vulputate Turpis. Magna venenatis. Amet massa auctor purus odio Habitant sapien Faucibus, porttitor Commodo aliquet tempus nam Ac viverra velit aptent';
+msg.textContent = output;
 
 btn.addEventListener('click', function () {
 
-    /* Clear output on every new button click */
-    msg.textContent = '';
-
     var outputRaw = '';
-    var output = '';
 
     /* Get amount of requested words */
     var amountWords = Number(document.querySelector('#amount').value);
@@ -50,7 +50,7 @@ btn.addEventListener('click', function () {
         text = vocab[Math.floor(Math.random() * vocab.length)] + ' ';
 
         /* Mix in uppercased strings */
-        if (Math.random() > 0.8) {
+        if (Math.random() > 0.85) {
             text = text.charAt(0).toUpperCase() + text.slice(1);
         }
 
@@ -59,11 +59,17 @@ btn.addEventListener('click', function () {
             text = text.replace(text.slice(-1), text.slice(-1) + '.');
         }
 
+        /* Mix in commas */
+        if (Math.random() > 0.9) {
+            text = text.replace(text.slice(-2), text.charAt(text.length - 2) + ', ');
+        }
+
+
         /* If last char of string === '.', remove space before it */
         if (text.slice(-1) === '.') {
             text = text.slice(0, -2) + text.slice(-1) + ' ';
         }
-        
+
         outputRaw += text;
     }
 
@@ -71,10 +77,10 @@ btn.addEventListener('click', function () {
     outputRaw = outputRaw.replace(/\.+../g, function (a) {
         return a.toUpperCase();
     })
-    
+
     /* uppercase first letter of text output */
     output = outputRaw.replace(outputRaw.charAt(0), outputRaw.charAt(0).toUpperCase());
-    
+
     msg.textContent = output;
-    
+
 })
