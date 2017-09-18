@@ -45,7 +45,7 @@ btn.addEventListener('click', function () {
     var amountWords = Number(document.querySelector('#amount').value);
 
     /* Get the by-user-requested amount of random words out of array "vocab" */
-    for (var i = 0; i <= amountWords; i++) {
+    for (var i = 1; i <= amountWords; i++) {
         var text = '';
         text = vocab[Math.floor(Math.random() * vocab.length)] + ' ';
 
@@ -59,16 +59,27 @@ btn.addEventListener('click', function () {
             text = text.replace(text.slice(-1), text.slice(-1) + '.');
         }
 
-        /* Mix in commas */
-        if (Math.random() > 0.9) {
-            text = text.replace(text.slice(-2), text.charAt(text.length - 2) + ', ');
+        /* Mix in commas - if string ends with ' .', replace last 2 chars with comma */
+        if (Math.random() > 0.8) {
+            if (text.slice(-2) === ' .') {
+                console.log('doedel');
+                text = text.replace(text.slice(-2), ', ');
+            } else {
+                text = text.replace(text.slice(-2), text.charAt(text.length - 2) + ', ');
+            }
         }
 
 
-        /* If last char of string === '.', remove space before it */
+        /* If last 2 chars of string === ' .', remove space before period it */
         if (text.slice(-1) === '.') {
             text = text.slice(0, -2) + text.slice(-1) + ' ';
         }
+
+
+        if (text.slice(-2) === ' ,') {
+            text = text.replace(text.slice(-2), '.');
+        }
+
 
         outputRaw += text;
     }
@@ -77,9 +88,11 @@ btn.addEventListener('click', function () {
     outputRaw = outputRaw.replace(/\.+../g, function (a) {
         return a.toUpperCase();
     })
-
+    
+    
     /* uppercase first letter of text output */
     output = outputRaw.replace(outputRaw.charAt(0), outputRaw.charAt(0).toUpperCase());
+
 
     msg.textContent = output;
 
