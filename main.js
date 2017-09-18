@@ -33,14 +33,46 @@ var vocab = [
 var btn = document.querySelector('.create');
 var msg = document.querySelector('.output');
 
-
-
-
 btn.addEventListener('click', function () {
-    var text = '';
+
+    /* Clear output on every new button click */
+    msg.textContent = '';
+
+    /* Get amount of requested words */
     var amountWords = Number(document.querySelector('#amount').value);
+
+    /* Get the by-user-requested amount of random words out of array "vocab" */
     for (var i = 0; i <= amountWords; i++) {
-        text += vocab[Math.floor(Math.random() * vocab.length)] + ' ';
+        var text = '';
+        text = vocab[Math.floor(Math.random() * vocab.length)] + ' ';
+
+        /* Mix in uppercased strings */
+        if (Math.random() > 0.8) {
+            text = text.charAt(0).toUpperCase() + text.slice(1);
+        }
+
+        /* Mix in periods */
+        if (Math.random() > 0.9) {
+            text = text.replace(text.slice(-1), text.slice(-1) + '.');
+        }
+        
+        /* If last char of string === '.', remove space before it */
+        if (text.slice(-1) === '.') {
+            text = text.slice(0, -2) + text.slice(-1) + ' ';
+        }
+        
+  
+        
+
+        msg.textContent += text;
     }
-    msg.textContent = text;
+
+
+
+
+
+
+
+
+
 })
