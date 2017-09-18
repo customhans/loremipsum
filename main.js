@@ -38,6 +38,9 @@ btn.addEventListener('click', function () {
     /* Clear output on every new button click */
     msg.textContent = '';
 
+    var outputRaw = '';
+    var output = '';
+
     /* Get amount of requested words */
     var amountWords = Number(document.querySelector('#amount').value);
 
@@ -55,13 +58,23 @@ btn.addEventListener('click', function () {
         if (Math.random() > 0.9) {
             text = text.replace(text.slice(-1), text.slice(-1) + '.');
         }
-        
+
         /* If last char of string === '.', remove space before it */
         if (text.slice(-1) === '.') {
             text = text.slice(0, -2) + text.slice(-1) + ' ';
         }
-
-        msg.textContent += text;
+        
+        outputRaw += text;
     }
 
+    /* use RegExp replace-method to uppercase every character after '. ' */
+    outputRaw = outputRaw.replace(/\.+../g, function (a) {
+        return a.toUpperCase();
+    })
+    
+    /* uppercase first letter of text output */
+    output = outputRaw.replace(outputRaw.charAt(0), outputRaw.charAt(0).toUpperCase());
+    
+    msg.textContent = output;
+    
 })
