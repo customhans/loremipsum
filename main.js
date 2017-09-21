@@ -32,8 +32,6 @@ var vocab = [
 ];
 var btn = document.querySelector('.create');
 var msg = document.querySelector('.output');
-/* Clear output on every new button click */
-
 var output = 'Elit Eleifend nec quam, aliquam vitae Interdum id curabitur fermentum. Nec ornare Nibh porttitor dolor Rhoncus fusce aptent enim aliquam justo nibh lorem semper sapien Morbi porta nisi sociosqu semper sed nisl ultrices facilisis nostra nostra pellentesque Dictumst, sollicitudin a iaculis nostra Id consequat Pharetra ullamcorper. Suscipit gravida facilisis. Class Sociosqu hendrerit, etiam In aenean Aliquet Consectetur ut libero neque Conubia etiam Id Scelerisque Suspendisse. Urna proin lectus Cras pharetra sit enim dictum dictum aenean porta curabitur etiam feugiat imperdiet vulputate Turpis. Magna venenatis. Amet massa auctor purus odio Habitant sapien Faucibus, porttitor Commodo aliquet tempus nam Ac viverra velit aptent';
 msg.textContent = output;
 
@@ -62,25 +60,20 @@ btn.addEventListener('click', function () {
         /* Mix in commas - if string ends with ' .', replace last 2 chars with comma */
         if (Math.random() > 0.8) {
             if (text.slice(-2) === ' .') {
-                console.log('doedel');
                 text = text.replace(text.slice(-2), ', ');
             } else {
                 text = text.replace(text.slice(-2), text.charAt(text.length - 2) + ', ');
             }
         }
 
-
         /* If last 2 chars of string === ' .', remove space before period it */
         if (text.slice(-1) === '.') {
             text = text.slice(0, -2) + text.slice(-1) + ' ';
         }
 
-
         if (text.slice(-2) === ' ,') {
             text = text.replace(text.slice(-2), '.');
         }
-
-
         outputRaw += text;
     }
 
@@ -89,11 +82,7 @@ btn.addEventListener('click', function () {
         return a.toUpperCase();
     })
     
-    
     /* uppercase first letter of text output */
     output = outputRaw.replace(outputRaw.charAt(0), outputRaw.charAt(0).toUpperCase());
-
-
     msg.textContent = output;
-
 })
